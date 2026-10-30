@@ -1,1 +1,19 @@
-<h1>Hello world!</h1>
+<!DOCTYPE html>
+<html>
+<body>
+  <h1>Rocket Telemetry</h1>
+  <p>Altitude: <span id="altitude">--</span> m</p>
+  <p>Velocity: <span id="velocity">--</span> m/s</p>
+  <p>Temperature: <span id="temperature">--</span> °C</p>
+
+  <script>
+    setInterval(async () => {
+      const response = await fetch('http://100.x.x.x:8000/telemetry');
+      const data = await response.json();
+      document.getElementById('altitude').textContent = data.altitude;
+      document.getElementById('velocity').textContent = data.velocity;
+      document.getElementById('temperature').textContent = data.temperature;
+    }, 1000); // Update every 1 second
+  </script>
+</body>
+</html>
